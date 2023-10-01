@@ -1,0 +1,267 @@
+\documentclass[a4paper,twoside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath,amsthm}
+\usepackage{amssymb,amsfonts}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage[obeyspaces]{url}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{framed}
+\usepackage{skull}
+\usepackage{stackengine}
+\usepackage{scalerel}
+\usepackage{mathrsfs}
+\usepackage{wasysym}
+\usepackage{tikz}
+\usepackage{relsize}
+\usepackage{cancel}
+\usepackage{fontawesome}
+\usepackage[font=small]{caption}
+\colorlet{shadecolor}{blue!9}
+\definecolor{Red}{rgb}{0,0,0.3}
+
+\setlength{\headheight}{14pt}
+\setlength{\topmargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\textwidth}{18cm} 
+\setlength{\textheight}{25cm}
+
+\linespread{1.2}
+
+\usepackage{lastpage}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyhead[RE]{\slshape \rightmark}
+\fancyhead[LO]{\slshape \leftmark}
+%\fancyhead[CO,CE]{\bfseries Jacopo D'Aurizio - Esercizi svolti di Analisi 1}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[CE,CO]{Pagina \thepage\ / \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.2pt}
+\renewcommand{\epsilon}{\varepsilon}
+
+%\renewcommand{\thesubsection}{\Roman{subsection}}
+\newcommand{\mydef}{\;\dot{=}_{\!\!\!\!\mbox{. }}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Pro}{\mathbb{P}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\bigo}[1]{O\left(#1\right)}
+\newcommand{\smallo}[1]{o\left(#1\right)}
+\newcommand{\hard}{(\skull)}
+\newcommand{\Conv}[1]{\operatorname{Hull}\left(#1\right)}
+\newcommand{\arcsinh}[1]{\operatorname{arcsinh}\left(#1\right)}
+\newcommand{\arccosh}[1]{\operatorname{arccosh}\left(#1\right)}
+\newcommand{\arctanh}[1]{\operatorname{arctanh}\left(#1\right)}
+\newcommand{\emptyline}{$\phantom{}$}
+\newcommand{\nline}{$\phantom{}$\\}
+\newcommand{\sinc}{\operatorname{sinc}}
+\newcommand{\GM}{\operatorname{GM}}
+\newcommand{\AM}{\operatorname{AM}}
+\renewcommand{\gcd}{\operatorname{mcd}}
+\newcommand{\mcd}{\operatorname{mcd}}
+\newcommand{\no0}{$\setminus{0}$}
+\theoremstyle{definition}
+\newtheorem{theorem}{\color{Red}\underline{\textrm Teorema}}
+
+\newenvironment{theo}
+  {\begin{shaded}\begin{theorem}}
+  {\end{theorem}\end{shaded}}
+
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{cor}[theorem]{Corollario}
+%\newtheorem{definizione}[theorem]{Definizione}
+%\newtheorem{esempio}[theorem]{Esempio}
+%\newtheorem{ex}[theorem]{Esercizio}
+
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{cor}[theorem]{Corollario}
+\newtheorem{definition}[theorem]{Definizione}
+\newtheorem{es}[theorem]{Esempio}
+\newtheorem{ex}[theorem]{Esercizio}
+\newtheorem{oss}[theorem]{Osservazione}
+\newtheorem{prop}[theorem]{Proposizione}
+\newtheorem{theorem}[theorem]{Teorema}
+\numberwithin{theorem}{section}
+
+\makeatletter
+\DeclareFontFamily{U}{tipa}{}
+\DeclareFontShape{U}{tipa}{m}{n}{<->tipa10}{}
+\newcommand{\arc@char}{{\usefont{U}{tipa}{m}{n}\symbol{62}}}%
+
+\newcommand{\arc}[1]{\mathpalette\arc@arc{#1}}
+
+\newcommand\dangersign[1][2ex]{%
+  \renewcommand\stacktype{L}%
+  \scaleto{\stackon[1.3pt]{\color{red}$\triangle$}{\tiny !}}{#1}%
+}
+
+\newcommand{\arc@arc}[2]{%
+  \sbox0{$\m@th#1#2$}%
+  \vbox{
+    \hbox{\resizebox{\wd0}{\height}{\arc@char}}
+    \nointerlineskip
+    \box0
+  }%
+}
+\makeatother
+\setcounter{section}{0}
+\begin{document}
+\setlength\parindent{0pt}
+\thispagestyle{empty}
+\begin{center}{\large \textbf{ {\Huge Geometria 2} \\
+B.A.M. 2023}}
+\end{center}
+\rule{\textwidth}{1pt}
+\tableofcontents
+\newpage
+
+\section{Teoria}
+\subsection{Geometria Proiettiva}
+Dato uno Spazio Vettoriale $V$ su un campo $\K$. Si denota $\Pro(V)$ lo \textbf{spazio proiettivo} di $V$ su $\K$ e
+$$\Pro(V)= \frac{V}{\sim}$$
+dove la relazione $\sim$ equivale a dire che $v\sim w \Leftrightarrow \exists\lambda\in\K^*$ tale che $v=\lambda w$.\\
+Questa relazione è di \textbf{equivalenza}.\\
+La dimensione del proiettivo si denota con $dim\Pro(V)=dim_\K V -1$.\\
+Si dice \textbf{Trasformazione Proiettiva} una funzione $$f:\Pro(V)\to\Pro(W)$$
+tale che esiste $\phi:V\to W$ lineare tale che $$f([v])=[\phi(v)]$$ cioè $\phi$ induce $f$ per passaggio al quoziente.\\
+Una trasformazione proiettiva invertibile si dice \textbf{Isomorfismo Proiettivo}.\\
+
+Una trasformazione proiettiva da $\Pro(V)$ in sè stesso si chiama \textbf{Proiettività} (le proiettività sono isomorfismi proiettivi del proiettivo in sè stesso).\\
+Le proiettività di $\Pro(V)$ formano un gruppo e si denotano con $\mathbb{PGL}(V)$.\\
+
+\begin{oss}
+    $$f:\Pro(V)\to\Pro(V)$$ proiettività i punti fissi di $f$ sono in bigezione con le rette di autovettori di $\phi:V\to V$ che induce $f$. Dato che $f([v])=[v]\Leftrigharrow [\phi(v)]=[v]\leftrightarrow \phi(v)=\lambda v$ 
+\end{oss}
+\begin{cor}
+Sia $f:\Pro^n(\R)\to\Pro^n(\R)$ una proiettività, con $n$ pari, allora $f$ ammette un punto fisso. \\
+Invece se $f:\Pro^n(\C)\to\Pro^n(\C)$ una proiettività, allora ammette punto fisso $\forall n\in\N$.
+\end{cor}
+\begin{def}
+$H\subset\Pro(V)$ è un \textbf{Sottospazio Proiettivo} se $\exists W\subset V$ sottospazio vettoriale tale che $H=\pi(W)\setminus{0}$ dove $\pi:V\setminus{0}\to\Pro(V)$ è la proiezione al quoziente.\\
+Inoltre $dim H=dim W-1$.
+\end{def}
+\begin{prop}
+Intersezione finita di sottospazi proiettivi è un sottospazio proiettivo.
+\end{prop}
+\begin{oss}
+    Per ogni sottoinsime $F\subset\Pro(V)$ è ben definito il più piccolo sottospazio di $\Pro(V)$ che contiene $F$m che viene denotato con $L(F)$
+$$L(F)=\cap S$$
+con S sottospazio di $\Pro(V)$ che contiene $F$.
+\end{oss}
+
+invece, come nel caso vettoriale l'unione di sottospazi non è sempre un sottospazio, si considererà allora il sottospazio generato come:
+$$L(S_1,S_2)=L(S_1\cup S_2)$$
+\begin{prop}
+    consideriamo:
+    $S_1=\Pro(H_1)=\pi(H_1\no0)$ e $S_2=\Pro(H_2)=\pi(H_2\no0)$ 
+    $H_i\subset V$ sottospazi vettoriali allora: $$L(S_1,S_2)=\Pro(H_1+H_2)=\pi((H_1+H_2)\no0)$$
+
+\end{prop}
+\begin{theorem}[Formula di Grassman Proiettiva]
+Siano $S_1,S_2\in\Pro(V)$ sottospazi. Allora
+$$dimL(S_1,S_2)=dimS_1+dimS_2-dimS_1\cap S_2$$
+\end{theorem}
+\begin{cor}
+    $S_1,S_2$ come sopra, se $dimS_1+dimS_2\geq dim\Pro(V)\Rightarrow S_1\cap S_2 \neq \varnothing$
+\end{cor}
+\begin{cor}
+    due rette in un piano proiettivo si incontrano sempre.
+\end{cor}
+\newpage
+\section{Esercizi}
+\subsection{Geometria Proiettiva}
+\textbf{ES.1} Ogni trasformazione proiettiva è iniettiva.
+\textbf{Dimostrazione}\\
+ogni $$f:\Pro(V)\to\Pro(W)$$ è indotta da una $$\phi:V\to W$$
+iniettiva, cioè $f([v])=[\phi(v)]$. se $f$ non fosse iniettiva esisterebbero $v,w\in\Pro(V)$ tali che $$f([v])=f([w])\Rightarrow [\phi(v)]=[\phi(w)]$$ che è assurdo per l'iniettività di $\phi$ \nline
+\\
+
+\centering \textbf{Foglio Esercizi 1}
+\begin{ex}[Es.1]
+    1) Si calcola la Cardinalità di $\Pro^n(\F_q)$ dove $\F_q$ Denota un campo finito con $q$ Elementi. \\
+    
+2) Siano $r_0, r_1,r_2$ tre rette non concorrenti in un piano proiettivo $\Pro(V)$(quindi $dim\Pro(V)=2$) su un campo $\K$ si mostri che esiste $$P\in \Pro(V)\setminus (r_0\cup r_1\cup r_2)$$ \\
+\textbf{Dimostrazione:}\\
+
+Punto 1) \\
+È equivalente al chiederci “Quante classe di equivalenza modulo $q$, Rispetto alla relazione essere sulla stessa retta, ci sono in $\F_q^n$”. Ovvero in quanti modi posso scegliere un vettore n+1-dimensionale modulo q (escludendo la classe di 0)?
+Che si traduce in $|\Pro^n(\F_q)|=\frac{q^{n+1}}{q-1}$\\
+
+Punto 2)\\
+Essendo nel proiettivo vero che posso identificare i punti con delle rette e viceversa, considero il problema duale: “siano $p_1,p_2$ e $p_3$ punti del proiettivo non allineati, mostrare che esiste una retta $r$” che non passa per tutti e tre”
+L’argomento quindi adesso diventa banale considerando che lo spazio proiettivo è ottenunto considerando la relazione di equivalenza: “essere sulla stessa retta” ma allora avrei che i tre punti sarebbero anche allineati nello spazio vettoriale base che è assurdo.
+
+\end{ex}
+\begin{ex}[Es.2]
+Siano $W_1,W_2,W_3$ Piani di $\Pro^4(\K)$ tali $W_i\cap W_j$ È un punto per ogni $i\neq j$ E che $W_1\cap W_2\cap W_3 =\emptyset$. 
+Si Mostra che esiste un unico piano $W_0\subseteq \Pro^3(K)$ tale che $i=1,2,3$ L’insieme $W_0\cap W_i$ Sia una retta proiettiva.
+
+\textbf{Dimostrazione}
+
+Visto che i 3 piani $W_i$ Hanno intersezione a due a due non banale, mentre lo è quella di tutti e tre, e che queste intersezioni identificano tre punti: $q_{12},q_{13},q_{23}$ che mi rendo conto non essere allineati.
+Quindi $W_0=L(q_{12}\cup q_{13}\cup q_{23})$ è un piano proiettivo. Intersecando $W_0$ Con un qualsiasi $W_i$ Ottengo: (WLOG lo faccio per $W_1$)
+
+$W_0\cap W_1= L(q_{12}\cap q_{13})$ visto che sto semplicemente escludendo il contributo del terzo punto.
+Il generato da 2 punti del proiettivo è chiaramente una retta proiettiva.
+
+\end{ex}
+\begin{ex}[Es.3]
+[Bozza]\\
+Siano $r_1,r_2,r_3$ Rette di $\Pro^4(\K)$ a due a due sghembe e non tutte contenute in un iperpiano. Si mostri che esiste un unica retta che interseca sia $r_1$ Sia $r_2$ Sia $r_3$
+
+Le tre rette sono sottospazi proeittivi di dimensione 1. Per esempio $r_1=(\lambda 0 0 0)$, $r_2=(0 \mu 0 0)$ ed $r_1=(0 0 \delta 0)$ sono indipendenti tra di loro. Se
+
+\end{ex}
+\begin{ex}[Es.4]
+[Rifinire]\\
+
+Sia $f:\Pro^1(\K)\to \Pro^1(\K)$ una proiettività diversa dall’identità. Si mostri che $f^2=id$ Se e solo se esistono punti distinti $P,Q\in \Pro^1(\K)$ tali che $f(P)=Q$ E $f(Q)=P$
+
+Soluzione
+
+$\Rightarrow:$ Se $f^2=id$ E non essendo la proiettività identica esiste almeno un punto $P$ Tale che $f(P)=Q\neq P$ Ma allora riapplicando $f$ Ottengo:
+
+ $f(f(P))=f(Q)\Leftrightarrow P=f(Q)$
+
+$\Leftarrow$: $\exists P,Q\in P^1(K)$ tali che $f(P)=Q$ E $f(Q)=P$.
+Considero $f(f(P))$.
+$f(f(P))=f(Q)=P$ Cioè $f(f(P))$ è la proiettività identica, succede lo stesso a $Q$.
+Per ogni coppia di punti $A,B\in P^1(K)$ considero la coppia di proiettività $\phi_A,\psi_B: \Pro^1(\K)\to \Pro^1(\K)$
+Una l’inversa dell’altra.
+$$\phi_A=\left\{\begin{array}{ccl} \phi_A(A)=A & \text{se } & A\neq P,Q \\
+  \phi_A=id & \text{se} & A=P,Q  \\ 
+\end{array}$$
+Mentre $\psi_B=phi_A^{-1}$
+
+Queste sono proiettività e quindi automorfismi del $\Pro^1(\K)$ adesso quindi è chiaro che $\forall A,B\in \Pro^1(\K)$ 
+
+$$f(f(A))=\phi_A^{-1}(f(f(\phi_A(A)))=A$$ per come ho costruito $\phi_A$
+
+\end{ex}
+\newpage
+\section{Note}
+Gli appunti in questo file sono quasi interamente una trascrizione del corso di Frigerio di Geometria 2 Dell'università di Pisa, Anno 2023/2024
+https://mathb.in/76468. \\
+https://mathb.in/76469. \\
+https://mathb.in/76470 \\
+https://mathb.in/76471 \\
+
+\end{document}
