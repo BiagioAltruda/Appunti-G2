@@ -62,6 +62,7 @@
 \newcommand{\Pro}{\mathbb{P}}
 \newcommand{\K}{\mathbb{K}}
 \newcommand{\F}{\mathbb{F}}
+\newcommand{\B}{\mathbb{B}}
 \newcommand{\norm}[1]{\left\|#1\right\|}
 \newcommand{\bigo}[1]{O\left(#1\right)}
 \newcommand{\smallo}[1]{o\left(#1\right)}
@@ -93,12 +94,11 @@
 
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{cor}[theorem]{Corollario}
-\newtheorem{definition}[theorem]{Definizione}
+\newtheorem{definizione}[theorem]{Definizione}
 \newtheorem{es}[theorem]{Esempio}
 \newtheorem{ex}[theorem]{Esercizio}
 \newtheorem{oss}[theorem]{Osservazione}
 \newtheorem{prop}[theorem]{Proposizione}
-\newtheorem{theorem}[theorem]{Teorema}
 \numberwithin{theorem}{section}
 
 \makeatletter
@@ -135,29 +135,41 @@ B.A.M. 2023}}
 
 \section{Teoria}
 \subsection{Geometria Proiettiva}
+\subsubsection{Introduzione}
 Dato uno Spazio Vettoriale $V$ su un campo $\K$. Si denota $\Pro(V)$ lo \textbf{spazio proiettivo} di $V$ su $\K$ e
 $$\Pro(V)= \frac{V}{\sim}$$
 dove la relazione $\sim$ equivale a dire che $v\sim w \Leftrightarrow \exists\lambda\in\K^*$ tale che $v=\lambda w$.\\
 Questa relazione è di \textbf{equivalenza}.\\
 La dimensione del proiettivo si denota con $dim\Pro(V)=dim_\K V -1$.\\
+C'è una bigezione naturale tra:
+$$\Pro(V) \Longleftrightarrow {& \text{rette di } & V}$$
+$$[v]\longleftrightarrow Span(v)$$
+\begin{definizione}
+    $dim\Pro(V)= dim_\K V-1$ \\ 
+    Inoltre gli spazi proiettivi 1-dimensionali si chiamano rette proiettive, mentre quelli 2-dimensionali piani proiettivi.
+\end{definizione}
+\begin{definizione}
+    Sia $V=\K^{n+1}$, allora si definisce Spazio proiettivo standard di dimensione $n$ come: $\Pro^n(K)$. \\
+    Inoltre $dim\Pro^n(K)=dim\K-1$
+\end{definizione}
+Per esempio $P^1(\R)=\Pro(\R^2)$ e ha dimensione 1. 
 Si dice \textbf{Trasformazione Proiettiva} una funzione $$f:\Pro(V)\to\Pro(W)$$
 tale che esiste $\phi:V\to W$ lineare tale che $$f([v])=[\phi(v)]$$ cioè $\phi$ induce $f$ per passaggio al quoziente.\\
 Una trasformazione proiettiva invertibile si dice \textbf{Isomorfismo Proiettivo}.\\
 
 Una trasformazione proiettiva da $\Pro(V)$ in sè stesso si chiama \textbf{Proiettività} (le proiettività sono isomorfismi proiettivi del proiettivo in sè stesso).\\
 Le proiettività di $\Pro(V)$ formano un gruppo e si denotano con $\mathbb{PGL}(V)$.\\
-
 \begin{oss}
-    $$f:\Pro(V)\to\Pro(V)$$ proiettività i punti fissi di $f$ sono in bigezione con le rette di autovettori di $\phi:V\to V$ che induce $f$. Dato che $f([v])=[v]\Leftrigharrow [\phi(v)]=[v]\leftrightarrow \phi(v)=\lambda v$ 
+    $$f:\Pro(V)\to\Pro(V)$$ proiettività i punti fissi di $f$ sono in bigezione con le rette di autovettori di $\phi:V\to V$ che induce $f$. Dato che $f([v])=[v]\Leftrightarrow [\phi(v)]=[v]\Leftrightarrow \phi(v)=\lambda v$ 
 \end{oss}
 \begin{cor}
 Sia $f:\Pro^n(\R)\to\Pro^n(\R)$ una proiettività, con $n$ pari, allora $f$ ammette un punto fisso. \\
 Invece se $f:\Pro^n(\C)\to\Pro^n(\C)$ una proiettività, allora ammette punto fisso $\forall n\in\N$.
 \end{cor}
-\begin{def}
+\begin{definizione}
 $H\subset\Pro(V)$ è un \textbf{Sottospazio Proiettivo} se $\exists W\subset V$ sottospazio vettoriale tale che $H=\pi(W)\setminus{0}$ dove $\pi:V\setminus{0}\to\Pro(V)$ è la proiezione al quoziente.\\
 Inoltre $dim H=dim W-1$.
-\end{def}
+\end{definizione}
 \begin{prop}
 Intersezione finita di sottospazi proiettivi è un sottospazio proiettivo.
 \end{prop}
@@ -171,8 +183,8 @@ invece, come nel caso vettoriale l'unione di sottospazi non è sempre un sottosp
 $$L(S_1,S_2)=L(S_1\cup S_2)$$
 \begin{prop}
     consideriamo:
-    $S_1=\Pro(H_1)=\pi(H_1\no0)$ e $S_2=\Pro(H_2)=\pi(H_2\no0)$ 
-    $H_i\subset V$ sottospazi vettoriali allora: $$L(S_1,S_2)=\Pro(H_1+H_2)=\pi((H_1+H_2)\no0)$$
+    $S_1=\Pro(H_1)=\pi(H_1\setminus{0})$ e $S_2=\Pro(H_2)=\pi(H_2\setminus{0})$ 
+    $H_i\subset V$ sottospazi vettoriali allora: $$L(S_1,S_2)=\Pro(H_1+H_2)=\pi((H_1+H_2)\setminus{0})$$
 
 \end{prop}
 \begin{theorem}[Formula di Grassman Proiettiva]
@@ -185,6 +197,90 @@ $$dimL(S_1,S_2)=dimS_1+dimS_2-dimS_1\cap S_2$$
 \begin{cor}
     due rette in un piano proiettivo si incontrano sempre.
 \end{cor}
+\subsubsection{Riferimenti proiettivi}
+\begin{definizione}
+    $P_1,...,P_k\in\Pro(V)$ si dicondo \emph{indipendenti} se presi $v_i\in V$ tali che $[v_i]=P-1 \quad \forall i$ si ha che i vettori $v_1,...,v_k$ sono linearmente indipendenti in $V$.
+\end{definizione}
+\begin{oss}
+    La definizione di riferimento proiettivo è ben posta
+\end{oss}
+\begin{definizione}
+    $P_1,...,P_k\in\Pro(V)$ sono in \emph{posizione generale} se qualsiasi sottoinsieme di ${P_1,...,P_k}$ sostituito da $h$ punti con $h\leq n+1$, è indipendente. \par
+    Per esempio se $dim\Pro(V)=2,\quad P_1,...,P_k$ sono in posizione generale se e solo se sono a tre a tre non allineati.
+\end{definizione}
+\begin{definizione}
+    Un riferimento proiettivo di $\Pro(V)$ con $dim\Pro(V)=n$, è una $(n+2)-$upla $\mathcal{R}=(P_0,P_1,...,P_{n+1}$ di punti di $\Pro(V)$ in posizione generale. $P_{n+1}$ si chiama \emph{punto unità} di $\mathcal{R}$, mentre $P_0,...,P_n$ si chiamano \emph{punti fondamentali}.
+\end{definizione}
+\begin{definizione}
+    Se $\mathcal{R}$è un riferimento proiettivo di $\Pro(V)$, una \emph{base normalizzata} associata ad $\mathcal{R}$ è una base di $V$, $(v_0,...,v_n)$ tale che $[v_i]=P_1\quad\forall 0\leq i\leq n$ e $P_{n+1}=[v_0,...,v_n]$ 
+\end{definizione}
+\begin{theorem}
+    Sia $\mathcal{R}$ un riferimento proiettivo di $\Pro(V)$ allora esiste una base normalizzata $(v_0,...,v_n)$ di $V$ rispetto a $\mathcal{R}$. \\
+    Inoltre se $(v_0',...v_n')$è una seconda base normalizzata di $V$ rispetto a $\mathcal{R}$ allora: $\exists\lambda\in\K*$ tale che $v_i'=\lambda v_i\quad\forall0\leq i\leq n$ \\
+    (cioè la base normalizzata esiste ed è unica a meno di riscalamento simultaneo).
+\end{theorem}
+\begin{theorem}
+    Siano $f,g:\Pro(V)\to\Pro(W)$ due trasformazioni proeittive, e siano $\phi,\psi:V\to W$ lineari tali che inducono rispettivamente $f$ e $g$, sia inoltre $\mathcal{R}$ un riferimento proiettivo di $\Pro(V)$. Sono equivalenti: \\
+    1) $\exists\lambda\in\K*$ tale che $\phi=\lambda\psi$ (come applicazioni lineari)\\
+    2) $f=g$\\
+    3)$f(P)=g(P) \forall P\in\mathcal{R}$
+\end{theorem}
+\begin{cor}
+    Il gruppo delle proiettività $\mathbb{PGL}(V)$ è isomorfo a: $\frac{GL(V)}{N}$, dove $N\triangleleft GL(V)$ e $N=\left\{\lambda\cdot Id_V \quad|\quad\lambda\in\K*\right\}$.
+\end{cor}
+\begin{theorem}[fondamentale delle trasformazioni proeittive]
+Siano $\Pro(V)$ e $\Pro(W)$ due spazi proiettivi, con $dim\Pro(V)=dim\Pro(W)=n$, e $\mathcal{R},\mathcal{R'}$ due riferimenti proiettivi di $\Pro(V)$ e $\Pro(W)$ rispettivamente.\\
+Allora $\exists!$ trasformazione proiettiva $f:\Pro(V)\to\Pro(W)$ che manda \emph{ordinatamente} $\mathcal{R}$ in $\mathcal{R}$.
+\end{theorem}
+\subsubsection{Coordinate Omogenee}
+\begin{definizione}
+    Si dice che il punto $[(x_0,...,x_n)]$ di $\Pro^n(\K)$ ha \emph{coordinate omogenee} (rispeto al riferimento standard) $[x_0,...,x_n]$ oppure $[x_0:...:x_n]$. Il riferimento standard di $\Pro^n(\K)$ è il riferimento "indotto" dalla base standard, cioè $P_i=[0,...,1,...,0]$ (l'1 alla $i-$esima posizione), cioè $P_{n+1}=[1,1...,1]$
+\end{definizione}
+\begin{oss}
+    Le coordinate omogenee di un punto sono ben definite a meo di riscallamento simultaneo.
+\end{oss}
+In generale se $\Pro(V)$ è una spazio proiettivo di dimensione $n$, e $\mathcal{R}$ è un riferimento proiettivo $\mathcal{R}=(P_0,...,P_{n+1})$.
+Sono fatti equivalenti: \\
+1) So che $\exists! \quad f:\Pro(V)\to\Pro^n(\K)$ che porta il riferimento $\mathcal{R}$ nel riferimento standard di $\Pro^n(\K)$ ($f$ è un isomorfismo proiettivo per motivi dimensionali). e quindi le coordinate omogenee di un punto $P\in\Pro(V)$ sono $f(P)\in\Pro^n(\K)$.
+2) Sia $(v_0,...,v_n)$ una base normalizzata di $V$ rispetto a $\mathcal{R}$. Dato $P\in\Pro(V)$, se $P=[v]$ con $v\in V$ posso scrivere in modo unico $$v=a_0v_0+...+a_nv_n$$
+e dico che le coordinate di $P$ rispetto a $\mathcal{R}$ sono $[a_0,...,a_n]$. \\
+\begin{oss}
+    Se f:$\Pro(V)$ e $\Pro(W)$ è una trasformazione proiettiva, $\mathcal{R}$, $\mathcal{R'}$ sono riferimenti proiettivi di $\Pro(V)$ e $\Pro(W)$ rispettivamente, e $\B,\B'$ sono basi normalizzate rispettive di $V$ e $W$, se $f=[\phi]$, dove $\phi:V\to W$, posso considerare la matrice $M\in M(m+1,n+1)$, con n ed m rispettivamente le dimensioni di $\Pro(V)$ e $\Pro(W)$, che rappresenta $\phi$ rispetto a $\B$ e $\B'$. Allora $M$ rappresenta la trasformazione proiettiva $f$, nel senso che: $$[f(P)]_{\mathcal{R'}}=M\cdot[P]_\mathcal{R}$$
+    Notare che la matrice $M$ associata a $f$ è unica a meno di moltiplicazione per uno scalare non nullo.
+\end{oss}
+\subsubsection{Rappresentazione di Sottospazi}
+\textbf{Rappresentazione cartesiana} \\
+Se $S\subseteq \Pro(V)$ è un sottospazio proiettivo, allora per definizione $S=\Pro(W)$, dove $W\subseteq V$ è un sottospazio vettoriale di $V$. Se $n=dim\Pro(V)$, e $k=dimS$ allora, fissato un riferimento $\mathcal{R}$ di $\Pro(V)$ euna base normalizzata $\B$, il sottospazio vettoriale $W\subseteq V$ può essere descritto come luogo di zeri di $(n+1)-(k+1)=n-k$ equazioni lineari omogenee nelle coordinate indotte da $\B$, $$\left\{f_i=...=f_{n-k}\right\}$$
+Tali equazioni descrivo anche $S$ dentro il proiettivo, nel senso che $P\in\Pro(V)$ sia in $S$ se e solo se $[P]_\mathcal{R}$ soddisfa le equazioni $f_i=...=f_{n-k}$
+\begin{es}
+    In $\Pro^2(\R)$ posso considerareil sottospazio proiettivo descritto dall'equazione $r:x_0+x_1-x_2=0$ (una retta proiettiva) \\
+    per esempio $[1,1,2]$ sta se questa retta, sostituendo ho che effettivamente $\forall\lambda\neq0\quad[\lambda,\lambda,2\lambda]\in r$
+\end{es}
+\textbf{Rappresentazioni paramentrica}\\
+Si rappresenta $S\subseteq\Pro(V)$ come immagine di una trasformazione proiettiva. Nel vettoriale, questo corrisponde a scrivereun elemento di $W$ come elemento dello $Span$ di un insieme di vettori.
+Per esempio $$\left\{x_1-x_2+x_3\right\}=Span<\left(\begin{array}{ccl}
+     1\\
+     1\\
+     0
+\end{array}\right), \left(\begin{array}{ccl}
+     0\\1\\1
+\end{array}\right)>$$
+$$v=t_1\left(\begin{array}{c}
+1\\1\\0
+\end{array}\right)+t_2\left(\begin{array}{cc}
+     0\\1\\1
+\end{array}\right)$$
+con $t_1,t_2\in\R$
+$$\text{cioè: } & v=\left(\begin{array}{cc}
+     t_1\\t_1+t_2\\t_2
+\end{array}\right),\quad t_1,t_2\in\R$$
+Il sottospazio proiettivo associato di $\Pro^2(\R)$ sarà descritto dalla rappresentazione paramentrica:
+$$\left\{[t_1,t_1+t_2,t_2]\quad|\quad t_2 & \text{ e } & t_2 &\text{ non entrambi nulli}\right\}$$
+\begin{definizione}
+    un \emph{iperpiano} $W$ di $\Pro(V)$ è un sottospazio proiettivo di codimensione 1.\\
+    (dove $coDimW=dim\Pro(V)-dimW$)
+\end{definizione}
+
 \newpage
 \section{Esercizi}
 \subsection{Geometria Proiettiva}
@@ -195,12 +291,13 @@ iniettiva, cioè $f([v])=[\phi(v)]$. se $f$ non fosse iniettiva esisterebbero $v
 \\
 
 \centering \textbf{Foglio Esercizi 1}
-\begin{ex}[Es.1]
-    1) Si calcola la Cardinalità di $\Pro^n(\F_q)$ dove $\F_q$ Denota un campo finito con $q$ Elementi. \\
+\begin{ex}
+    1)Si calcola la Cardinalità di $\Pro^n(\F_q)$ dove $\F_q$ Denota un campo finito con $q$ Elementi. \\
     
-2) Siano $r_0, r_1,r_2$ tre rette non concorrenti in un piano proiettivo $\Pro(V)$(quindi $dim\Pro(V)=2$) su un campo $\K$ si mostri che esiste $$P\in \Pro(V)\setminus (r_0\cup r_1\cup r_2)$$ \\
-\textbf{Dimostrazione:}\\
-
+    2) Siano $r_0, r_1,r_2$ tre rette non concorrenti in un piano proiettivo $\Pro(V)$(quindi $dim\Pro(V)=2$) su un campo $\K$ si mostri che esiste $$P\in \Pro(V)\setminus (r_0\cup r_1\cup r_2)$$ \\
+\end{ex}
+\begin{proof}
+    
 Punto 1) \\
 È equivalente al chiederci “Quante classe di equivalenza modulo $q$, Rispetto alla relazione essere sulla stessa retta, ci sono in $\F_q^n$”. Ovvero in quanti modi posso scegliere un vettore n+1-dimensionale modulo q (escludendo la classe di 0)?
 Che si traduce in $|\Pro^n(\F_q)|=\frac{q^{n+1}}{q-1}$\\
@@ -209,12 +306,13 @@ Punto 2)\\
 Essendo nel proiettivo vero che posso identificare i punti con delle rette e viceversa, considero il problema duale: “siano $p_1,p_2$ e $p_3$ punti del proiettivo non allineati, mostrare che esiste una retta $r$” che non passa per tutti e tre”
 L’argomento quindi adesso diventa banale considerando che lo spazio proiettivo è ottenunto considerando la relazione di equivalenza: “essere sulla stessa retta” ma allora avrei che i tre punti sarebbero anche allineati nello spazio vettoriale base che è assurdo.
 
-\end{ex}
+\end{proof}
 \begin{ex}[Es.2]
 Siano $W_1,W_2,W_3$ Piani di $\Pro^4(\K)$ tali $W_i\cap W_j$ È un punto per ogni $i\neq j$ E che $W_1\cap W_2\cap W_3 =\emptyset$. 
 Si Mostra che esiste un unico piano $W_0\subseteq \Pro^3(K)$ tale che $i=1,2,3$ L’insieme $W_0\cap W_i$ Sia una retta proiettiva.
-
-\textbf{Dimostrazione}
+\end{ex}
+\begin{proof}
+    
 
 Visto che i 3 piani $W_i$ Hanno intersezione a due a due non banale, mentre lo è quella di tutti e tre, e che queste intersezioni identificano tre punti: $q_{12},q_{13},q_{23}$ che mi rendo conto non essere allineati.
 Quindi $W_0=L(q_{12}\cup q_{13}\cup q_{23})$ è un piano proiettivo. Intersecando $W_0$ Con un qualsiasi $W_i$ Ottengo: (WLOG lo faccio per $W_1$)
@@ -222,46 +320,34 @@ Quindi $W_0=L(q_{12}\cup q_{13}\cup q_{23})$ è un piano proiettivo. Intersecand
 $W_0\cap W_1= L(q_{12}\cap q_{13})$ visto che sto semplicemente escludendo il contributo del terzo punto.
 Il generato da 2 punti del proiettivo è chiaramente una retta proiettiva.
 
-\end{ex}
+\end{proof}
 \begin{ex}[Es.3]
 [Bozza]\\
 Siano $r_1,r_2,r_3$ Rette di $\Pro^4(\K)$ a due a due sghembe e non tutte contenute in un iperpiano. Si mostri che esiste un unica retta che interseca sia $r_1$ Sia $r_2$ Sia $r_3$
-
+\end{ex}
+\begin{proof}
+    
 Le tre rette sono sottospazi proeittivi di dimensione 1. Per esempio $r_1=(\lambda 0 0 0)$, $r_2=(0 \mu 0 0)$ ed $r_1=(0 0 \delta 0)$ sono indipendenti tra di loro. Se
 
-\end{ex}
+\end{proof}
 \begin{ex}[Es.4]
-[Rifinire]\\
-
 Sia $f:\Pro^1(\K)\to \Pro^1(\K)$ una proiettività diversa dall’identità. Si mostri che $f^2=id$ Se e solo se esistono punti distinti $P,Q\in \Pro^1(\K)$ tali che $f(P)=Q$ E $f(Q)=P$
-
-Soluzione
-
-$\Rightarrow:$ Se $f^2=id$ E non essendo la proiettività identica esiste almeno un punto $P$ Tale che $f(P)=Q\neq P$ Ma allora riapplicando $f$ Ottengo:
-
- $f(f(P))=f(Q)\Leftrightarrow P=f(Q)$
-
-$\Leftarrow$: $\exists P,Q\in P^1(K)$ tali che $f(P)=Q$ E $f(Q)=P$.
-Considero $f(f(P))$.
-$f(f(P))=f(Q)=P$ Cioè $f(f(P))$ è la proiettività identica, succede lo stesso a $Q$.
-Per ogni coppia di punti $A,B\in P^1(K)$ considero la coppia di proiettività $\phi_A,\psi_B: \Pro^1(\K)\to \Pro^1(\K)$
-Una l’inversa dell’altra.
-$$\phi_A=\left\{\begin{array}{ccl} \phi_A(A)=A & \text{se } & A\neq P,Q \\
-  \phi_A=id & \text{se} & A=P,Q  \\ 
-\end{array}$$
-Mentre $\psi_B=phi_A^{-1}$
-
-Queste sono proiettività e quindi automorfismi del $\Pro^1(\K)$ adesso quindi è chiaro che $\forall A,B\in \Pro^1(\K)$ 
-
-$$f(f(A))=\phi_A^{-1}(f(f(\phi_A(A)))=A$$ per come ho costruito $\phi_A$
-
 \end{ex}
+\begin{proof}
+$\Rightarrow:$ Se $f^2=id$ E non essendo la proiettività identica esiste almeno un punto $P$ Tale che $f(P)=Q\neq P$ Ma allora riapplicando $f$ Ottengo:
+ $f(f(P))=f(Q)\Leftrightarrow P=f(Q)$
+$\Leftarrow$: $\exists P,Q\in P^1(K)$ tali che $f(P)=Q$ E $f(Q)=P$.
+Essendo che $dim_K\mathbb{P}^1(K)=1$ È una retta proiettiva, che è generata da $L(P,Q)$. Ma:
+$$L(P,Q)= L(f^2(P),f^2(Q))=L(f(Q),f(P))=L(P,Q) $$
+Ho la tesi.
+\end{proof}
 \newpage
 \section{Note}
-Gli appunti in questo file sono quasi interamente una trascrizione del corso di Frigerio di Geometria 2 Dell'università di Pisa, Anno 2023/2024
-https://mathb.in/76468. \\
-https://mathb.in/76469. \\
-https://mathb.in/76470 \\
-https://mathb.in/76471 \\
+Gli appunti in questo file sono quasi interamente una trascrizione del corso di Frigerio di Geometria 2 Dell'università di Pisa, Anno 2023/2024\\
+
+\url{https://mathb.in/76468.} \\
+\url{https://mathb.in/76469.} \\
+\url{https://mathb.in/76470 }\\
+\url{https://mathb.in/76496} \\
 
 \end{document}
